@@ -5,7 +5,6 @@ let handler = async (m, { conn, text }) => {
   if (!res.ok) throw await res.text()
   let json = await res.json()
   if (!json.url) throw 'Media tidak ditemukan!'
-  if (json.nsfw) throw 'Content blocked'
   await conn.sendFile(m.chat, json.url, text, json.title, m, false, { thumbnail: Buffer.alloc(0) })
 }
 handler.help = ['subreddit <query>']
